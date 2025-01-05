@@ -15,6 +15,7 @@
             drawPieChart();
             drawLineChart();
             drawBubbleChart();
+            drawBubbleChartParticipantsByYear();
         }
 
         // Bar chart: Participants by Course
@@ -102,6 +103,41 @@
             var chart = new google.visualization.BubbleChart(document.getElementById('bubble_chart'));
             chart.draw(data, options);
         }
+        function drawTableViewParticipants() {
+            var data = google.visualization.arrayToDataTable([
+                ['Course Title', 'Participants'],
+                ['Circuits and Electronics', 36105],
+                ['Introduction to Computer Science', 129400],
+                ['Solid State Chemistry', 16663],
+                ['Health in Numbers', 52521],
+                ['CS50x', 62709]
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('table_view_participants'));
+            table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+        }
+
+        // Bubble Chart: Participants by Year and Course
+        function drawBubbleChartParticipantsByYear() {
+            var data = google.visualization.arrayToDataTable([
+                ['Course Title', 'Year', 'Participants', 'Category', 'Engagement (%)'],
+                ['Circuits and Electronics', 2012, 36105, 'STEM', 83.2],
+                ['CS50x', 2013, 62709, 'CS', 0.0],
+                ['Solid State Chemistry', 2014, 16663, 'Chemistry', 87.49],
+                ['Introduction to Computer Science', 2015, 129400, 'CS', 89.14],
+                ['Health in Numbers', 2016, 52521, 'Health', 77.45]
+            ]);
+
+            var options = {
+                title: 'Participants by Year and Course',
+                hAxis: {title: 'Year'},
+                vAxis: {title: 'Participants'},
+                bubble: {textStyle: {fontSize: 11}}
+            };
+
+            var chart = new google.visualization.BubbleChart(document.getElementById('bubble_chart_participants'));
+            chart.draw(data, options);
+        }
     </script>
 </head>
 <body>
@@ -110,5 +146,6 @@
     <div id="pie_chart" style="width: 900px; height: 500px;"></div>
     <div id="line_chart" style="width: 900px; height: 500px;"></div>
     <div id="bubble_chart" style="width: 900px; height: 500px;"></div>
+    <div id="bubble_chart_participants" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
