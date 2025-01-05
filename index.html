@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Charts Visualizations</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Load the Google Charts library
+        google.charts.load('current', {'packages':['corechart', 'bar']});
+
+        // Set callback to draw all charts
+        google.charts.setOnLoadCallback(drawAllCharts);
+
+        function drawAllCharts() {
+            drawBarChart();
+            drawPieChart();
+            drawLineChart();
+            drawBubbleChart();
+        }
+
+        // Bar chart: Participants by Course
+        function drawBarChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Course Title', 'Participants'],
+                ['Circuits and Electronics', 36105],
+                ['Introduction to Computer Science', 129400],
+                ['Solid State Chemistry', 16663],
+                ['Health in Numbers', 52521],
+                ['CS50x', 62709]
+            ]);
+
+            var options = {
+                title: 'Participants by Course',
+                chartArea: {width: '50%'},
+                hAxis: {
+                    title: 'Number of Participants',
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'Course Title'
+                }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
+            chart.draw(data, options);
+        }
+
+        // Pie chart: Gender Distribution
+        function drawPieChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Gender', 'Percentage'],
+                ['Male', 70],
+                ['Female', 30]
+            ]);
+
+            var options = {
+                title: 'Gender Distribution',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+            chart.draw(data, options);
+        }
+
+        // Line chart: Certification Rates Over Time
+        function drawLineChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', '% Certified'],
+                ['2012', 55],
+                ['2013', 64],
+                ['2014', 73],
+                ['2015', 47],
+                ['2016', 60]
+            ]);
+
+            var options = {
+                title: 'Certification Rates Over Time',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+            chart.draw(data, options);
+        }
+
+        // Bubble chart: Total Course Hours vs Median Hours for Certification
+        function drawBubbleChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['ID', 'Total Hours (K)', 'Median Hours', 'Course Title'],
+                ['MITx', 418.94, 64.45, 'Circuits and Electronics'],
+                ['HarvardX', 884.04, 78.53, 'CS50x'],
+                ['MITx', 227.55, 61.28, 'Solid State Chemistry'],
+                ['HarvardX', 804.41, 76.10, 'Health in Numbers']
+            ]);
+
+            var options = {
+                title: 'Total Course Hours vs Median Hours for Certification',
+                hAxis: {title: 'Total Hours (Thousands)'},
+                vAxis: {title: 'Median Hours'},
+                bubble: {textStyle: {fontSize: 11}}
+            };
+
+            var chart = new google.visualization.BubbleChart(document.getElementById('bubble_chart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <h1>Google Charts Visualizations</h1>
+    <div id="bar_chart" style="width: 900px; height: 500px;"></div>
+    <div id="pie_chart" style="width: 900px; height: 500px;"></div>
+    <div id="line_chart" style="width: 900px; height: 500px;"></div>
+    <div id="bubble_chart" style="width: 900px; height: 500px;"></div>
+</body>
+</html>
